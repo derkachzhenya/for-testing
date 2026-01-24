@@ -73,3 +73,28 @@ Route::controller(PostController::class)->group(function () {
     Route::patch('/posts/{post}', 'update')->name('posts.update');
     Route::delete('/posts/{post}', 'destroy')->name('posts.destroy');
 });
+
+
+Route::view('/about', 'about.index')->name('about');
+
+Route::get('/posts/{post}/comments/{comment}', function ($post, $comment) {
+    return "Post $post, comment $comment";
+});
+
+Route::get('/user/{id}', function (string $id) {
+    return 'User '.$id;
+});
+
+Route::get('/users/{name?}', function (?string $name = null) {
+    return $name;
+});
+
+Route::prefix('admin')->group(function () {
+    Route::get('/user', function () {
+        return 'Admin Dashboard';
+    })->name('admin.dashboard');
+
+    Route::get('/settings', function () {
+        return 'Admin Settings';
+    })->name('admin.settings');
+});
