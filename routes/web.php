@@ -1,12 +1,20 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
-
 
 Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/gretin', function () {
+    return [
+        'name' => 'Yevhen',
+        'secondname' => 'Derkach',
+    ];
+});
 
+Route::get('/user', [UserController::class, 'index']);
 
-
+Route::get('/category', [CategoryController::class, 'index']);
