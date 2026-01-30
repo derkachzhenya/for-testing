@@ -6,14 +6,8 @@ use Illuminate\Http\Request;
 
 class StatusController extends Controller
 {
-    public function index(Request $request)
+    public function index()
     {
-        $role = $request->query('role');
-        $active = $request->query('active');
-
-        return view('status.index', [
-            'role' => $role,
-            'active' => $active
-        ]);
+        return view('status.index');
     }
 }
