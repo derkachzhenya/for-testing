@@ -7,6 +7,8 @@
     <title>Category</title>
 </head>
 <body>
-    
+    @foreach ($categories as $category)
+        {{ $category -> title }}
+    @endforeach
 </body>
 </html>
