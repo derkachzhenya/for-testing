@@ -1,12 +1,24 @@
 <?php
 
-use App\Http\Controllers\PostController;
+use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+Route::view('/', 'home.index')->name('base');
+Route::view('/about', 'home.about')->name('about');
+Route::view('/service', 'home.service')->name('service');
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 
-Route::view('/', 'home.index')->name('home');
-Route::get('/posts', [PostController::class, 'index'])->name('posts.index');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
