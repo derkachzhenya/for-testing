@@ -8,36 +8,23 @@ class BlogController extends Controller
 {
     public function index(): View
     {
-        $posts = $this->posts();
+        $posts = [
+            ['id' => 1, 'title' => 'Hello'],
+            ['id' => 2, 'title' => 'Hello2'],
+        ];
 
         return view('blog.index', compact('posts'));
     }
 
     public function show(int $id): View
     {
-        $post = collect($this->posts())->firstWhere('id', $id);
+        $posts = [
+            ['id' => 1, 'title' => 'Hello'],
+            ['id' => 2, 'title' => 'Hello2'],
+        ];
 
-        if (! $post) {
-            abort(404);
-        }
+        $post = collect($posts)->firstWhere('id', $id);
 
         return view('blog.show', compact('post'));
-    }
-
- 
-    private function posts(): array
-    {
-        return [
-            [
-                'id' => 1,
-                'title' => 'Hello',
-                'post' => 'How are you',
-            ],
-            [
-                'id' => 2,
-                'title' => 'Hellof',
-                'post' => 'How are youe',
-            ],
-        ];
     }
 }
