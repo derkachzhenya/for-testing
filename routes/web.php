@@ -1,15 +1,7 @@
 <?php
 
-use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-Route::view('/', 'home.index')->name('base');
-Route::view('/about', 'home.about')->name('about');
-Route::view('/service', 'home.service')->name('service');
-
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
-Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
