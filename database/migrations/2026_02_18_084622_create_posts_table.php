@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->unsignedBigInteger('likes');
             $table->boolean('is_published')->nullable();
+            $table->json('car');
             $table->timestamps();
         });
     }

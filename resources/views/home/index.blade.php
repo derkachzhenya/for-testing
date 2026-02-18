@@ -2,4 +2,5 @@
 @section('title', 'Main')
 @section('content')
     <h1 class="text-center">Main</h1>
+    <a href="{{ route('post.index') }}">Post</a>
 @endsection

@@ -1,11 +1,16 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
+
 Route::view('/', 'home.index')->name('home.index');
 
+Route::get('/post', [PostController::class, 'index'])->name('post.index');
+Route::get('/post/create', [PostController::class, 'create'])->name('post.create');
+Route::put('/post/{post}', [PostController::class, 'update'])->name('post.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
