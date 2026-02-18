@@ -12,16 +12,18 @@ class BlogController extends Controller
             ['id' => 1, 'title' => 'Hello'],
             ['id' => 2, 'title' => 'Hello2'],
         ];
+
         return view('blog.index', compact('blogs'));
     }
 
-    public function show($id)
-    {
+    public function show($id) {
         $blogs = [
             ['id' => 1, 'title' => 'Hello'],
             ['id' => 2, 'title' => 'Hello2'],
         ];
+
         $blog = collect($blogs)->firstWhere('id', $id);
+
         return view('blog.show', compact('blog'));
     }
 }
