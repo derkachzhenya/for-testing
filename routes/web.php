@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TaskController;
 use App\Http\Controllers\TodoController;
 use Illuminate\Support\Facades\Route;
+
 
 
 
@@ -16,6 +18,8 @@ Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 Route::get('/blog/{id}', [BlogController::class, 'show'])->name('blog.show');
 
 Route::resource('/todo', TodoController::class);
+
+Route::resource('/listing', ListingController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
