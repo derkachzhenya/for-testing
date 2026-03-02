@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Profile;
+use App\Models\Task;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -50,5 +51,10 @@ class User extends Authenticatable
     public function profile(): HasOne
     {
         return $this->hasOne(Profile::class);
+    }
+
+    public function task(): HasOne
+    {
+        return $this->hasOne(Task::class);
     }
 }
