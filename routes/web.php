@@ -2,12 +2,16 @@
 
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
+
 
 
 Route::view('/', 'home.index')->name('home.index');
 
 Route::resource('post', PostController::class);
+
+Route::get('/user/{user}', [UserController::class, 'show'])->name('user.show');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
