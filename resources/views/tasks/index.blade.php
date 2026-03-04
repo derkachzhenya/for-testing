@@ -8,7 +8,8 @@
         <p>{{ $task->description }}</p>
         <p>{{ $task->price }}</p>
          <p>{{ $task->is_active ? 'Available' : 'It is not available' }}</p>
-         <p>User: {{ $task->user?->name }}</p>
+         <p>User: {{ $task->user->name }}</p>
+         <p>Email: {{ $task->user->email }}</p>
     @endforeach
 
 @endsection

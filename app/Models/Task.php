@@ -12,7 +12,8 @@ class Task extends Model
         'title',
         'description',
         'price',
-        'is_active'
+        'is_active',
+        'user_id',
     ];
 
     protected $casts = [
