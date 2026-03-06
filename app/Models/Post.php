@@ -2,12 +2,14 @@
 
 namespace App\Models;
 
+use App\Models\Comment;
 use App\Models\Scopes\AncientScope;
 use Illuminate\Database\Eloquent\Attributes\Scope;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Prunable;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Log;
 
@@ -53,5 +55,10 @@ class Post extends Model
         static::created(function (Post $post) {
             Log::info('Created post' . $post->title);
         });
+    }
+
+    public function comments(): HasMany
+    {
+        return $this->hasMany(Comment::class);
     }
 }

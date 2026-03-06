@@ -8,13 +8,13 @@ class UserController extends Controller
 {
     public function index(): void
     {
-        // paginate
-        User::paginate(15);
+        // returns the first record or null
+        $user = User::first();
 
-        // simplePaginate
-        User::simplePaginate(15);
+        // throws ModelNotFoundException if no record exists
+        $user = User::firstOrFail();
 
-        // cursorPaginate
-        User::orderBy('id')->cursorPaginate(15);
+        // ensures exactly one record exists
+        $user = User::sole();
     }
 }
