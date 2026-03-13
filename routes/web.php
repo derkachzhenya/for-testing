@@ -1,17 +1,11 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 
-
-
 Route::view('/', 'home.index')->name('home.index');
 
-Route::resource('/category', CategoryController::class);
-Route::resource('/post', PostController::class);
 
 Route::get('/dashboard', function () {
     return view('dashboard');

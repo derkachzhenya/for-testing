@@ -3,16 +3,21 @@
 namespace App\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
-use Laravel\Mcp\Enums\Role;
-
 
 class User extends Authenticatable
 {
-
-    // Many-to-many relationship
-    public function roles()
+    public function example(): void
     {
-        return $this->belongsToMany(Role::class);
-    }
-} 
+        $email = 'test@example.com';
 
+        // ❌ Bad
+        $user = User::where('email', $email)->first();
+
+        if (!$user) {
+            abort(404);
+        }
+
+        // ✅ Better
+        $user = User::where('email', $email)->firstOrFail();
+    }
+}
