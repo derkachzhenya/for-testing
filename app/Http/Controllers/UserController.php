@@ -3,18 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index(): void
+    public function update(Request $request, User $user)
     {
-        // returns the first record or null
-        $user = User::first();
+        // ❌ Before — mass assignment vulnerability
+        $user->update($request->all());
 
-        // throws ModelNotFoundException if no record exists
-        $user = User::firstOrFail();
-
-        // ensures exactly one record exists
-        $user = User::sole();
+        // ✅ After — explicit fields only
+        $user->update($request->only([
+            'name',
+            'email',
+        ]));
     }
 }
