@@ -1,23 +1,23 @@
 <?php
 
-namespace App\Models;
+use Illuminate\Database\Eloquent\Model;
 
-use Illuminate\Foundation\Auth\User as Authenticatable;
+// $fillable vs $guarded
 
-class User extends Authenticatable
+class User extends Model
 {
-    public function example(): void
-    {
-        $email = 'test@example.com';
+    // $fillable
+    protected $fillable = ['name', 'email'];
 
-        // ❌ Bad
-        $user = User::where('email', $email)->first();
+    // Safe by default
+    // Needs manual updates
 
-        if (!$user) {
-            abort(404);
-        }
+    // ----------
 
-        // ✅ Better
-        $user = User::where('email', $email)->firstOrFail();
-    }
+    // $guarded
+    protected $guarded = [];
+
+    // Less code
+    // Faster dev
+    // Requires validation
 }

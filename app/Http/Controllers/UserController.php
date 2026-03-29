@@ -3,19 +3,16 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function update(Request $request, User $user)
+    public function show($id)
     {
-        // ❌ Before — mass assignment vulnerability
-        $user->update($request->all());
+        $user = User::find($id);
 
-        // ✅ After — explicit fields only
-        $user->update($request->only([
-            'name',
-            'email',
-        ]));
+        // debugging...
+        dd($user); // forgot to remove 
+
+        return view('user.show', compact('user'));
     }
 }
