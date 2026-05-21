@@ -1,23 +1,21 @@
 <?php
 
-use Illuminate\Database\Eloquent\Model;
+namespace App\Models;
 
-// $fillable vs $guarded
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
-class User extends Model
+class User extends Authenticatable
 {
-    // $fillable
-    protected $fillable = ['name', 'email'];
+    use SoftDeletes;
 
-    // Safe by default
-    // Needs manual updates
+    protected $fillable = [
+        'name',
+        'email',
+    ];
 
-    // ----------
-
-    // $guarded
-    protected $guarded = [];
-
-    // Less code
-    // Faster dev
-    // Requires validation
+    public function posts()
+    {
+        return $this->hasMany(Post::class);
+    }
 }
