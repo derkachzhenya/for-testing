@@ -2,46 +2,17 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends JsonResource
 {
-    public function toArray(Request $request): array
+    public function getActiveUsers(): Collection
     {
-        return [
-            'name' => $this->name,
-
-            'city' => data_get(
-                $this->resource,
-                'address.city',
-                'Unknown'
-            ),
-        ];
+        return User::query()
+            ->whereNotNull('email_verified_at')
+            ->latest()
+            ->get();
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
