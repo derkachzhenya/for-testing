@@ -3,32 +3,33 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
-    public function store(Request $request)
+    public function show(Post $post)
     {
-        $post = new Post();
+        /*
+         Before
 
-        $post->title = $request->title;
-        $post->slug = $this->generateSlug($request->title);
+        $post->views++;
 
         $post->save();
-    }
+        */
 
-    private function generateSlug(string $title): string
-    {
-        $slug = Str::slug($title);
-        $base = $slug;
-        $i = 1;
+        //  After
 
-        while (Post::where('slug', $slug)->exists()) {
-            $slug = "{$base}-{$i}";
-            $i++;
-        }
+        Post::where('id', $post->id)
+            ->increment('views');
 
-        return $slug;
+        return view('posts.show', compact('post'));
     }
 }
+
+
+
+
+
+
+
+
+
