@@ -9,19 +9,17 @@ class PostController extends Controller
     public function show(Post $post)
     {
         /*
-         Before
+    Before
 
-        $post->views++;
+    $post->views++;
 
-        $post->save();
-        */
+    $post->save();
+    */
 
-        //  After
+        // Recommended
 
         Post::where('id', $post->id)
             ->increment('views');
-
-        return view('posts.show', compact('post'));
     }
 }
 
