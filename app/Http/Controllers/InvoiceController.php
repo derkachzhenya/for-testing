@@ -2,18 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Invoice;
+use Illuminate\Support\Facades\Storage;
 
 class InvoiceController extends Controller
 {
-    public function index()
+    public function download()
     {
-        // ❌ Before
-        $overdue = Invoice::where('due_at', '<', now())->get();
-        $upcoming = Invoice::where('due_at', '>', now())->get();
+        $url = Storage::temporaryUrl(
+            'documents/report.pdf',
+            now()->addMinutes(10)
+        );
 
-        // ✅ After — Laravel 13
-        $overdue = Invoice::wherePast('due_at')->get();
-        $upcoming = Invoice::whereFuture('due_at')->get();
+        return redirect($url);
     }
 }
+
+
+
+
+
+
+
+
+
+
+
