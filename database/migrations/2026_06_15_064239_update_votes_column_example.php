@@ -9,10 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            // Risky
-            $table->integer('votes')->change();
-
-            // Safer
             $table->integer('votes')
                 ->unsigned()
                 ->default(1)
@@ -24,11 +20,10 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('posts', function (Blueprint $table) {
-            $table->integer('votes')->change();
+            // Restore the previous column definition
+            $table->integer('votes')
+                ->default(0)
+                ->change();
         });
     }
 };
-
-
-
-
