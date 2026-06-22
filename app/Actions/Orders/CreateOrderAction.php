@@ -8,9 +8,6 @@ use Illuminate\Support\Facades\DB;
 
 class CreateOrderAction
 {
-    /**
-     * @param  array{user_id: int, product_id: int, quantity: int, total: numeric}  $data
-     */
     public function handle(array $data): Order
     {
         return DB::transaction(function () use ($data) {
@@ -32,3 +29,9 @@ class CreateOrderAction
         });
     }
 }
+
+
+
+
+
+

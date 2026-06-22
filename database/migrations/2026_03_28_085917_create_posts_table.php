@@ -11,8 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // ✅ add index for sorting
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::create('posts', function (Blueprint $table) {
+            $table->id();
+            $table->foreignId('user_id')->nullable()->constrained()->nullOnDelete();
+            $table->string('title');
+            $table->string('slug')->unique();
+            $table->integer('votes')->default(0);
+            $table->timestamps();
+
             $table->index('created_at');
         });
     }
