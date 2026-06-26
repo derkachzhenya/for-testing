@@ -2,26 +2,21 @@
 
 namespace App\Jobs;
 
+use App\Models\Order;
+use App\Services\PaymentService;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Queue\Queueable;
+use Illuminate\Queue\Attributes\WithoutRelations;
 
+#[WithoutRelations]
 class ProcessPayment implements ShouldQueue
 {
     use Queueable;
 
-    /**
-     * Create a new job instance.
-     */
-    public function __construct()
-    {
-        //
-    }
+    public function __construct(public Order $order) {}
 
-    /**
-     * Execute the job.
-     */
-    public function handle(): void
+    public function handle(PaymentService $paymentService): void
     {
-        //
+        $paymentService->process($this->order);
     }
 }
