@@ -14,7 +14,8 @@ class PaymentService
 
         while ($attempts < 3) {
             try {
-                Http::post('https://api.example.com/charge', $data);
+                $response = Http::post('https://api.example.com/charge', $data);
+
                 break;
             } catch (Exception $e) {
                 $attempts++;
@@ -27,13 +28,13 @@ class PaymentService
             }
         }
 
+        
         // ✅ Built-in
-        Http::retry(3, 1000)
+        $response = Http::retry(3, 1000)
             ->post('https://api.example.com/charge', $data)
             ->throw();
     }
 }
-
 
 
 
