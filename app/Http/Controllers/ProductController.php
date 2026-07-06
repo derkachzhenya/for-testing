@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Illuminate\Http\JsonResponse;
 
 class ProductController extends Controller
 {
-
-    public function index()
+    public function index(): JsonResponse
     {
         $products = collect([
             ['name' => 'Keyboard', 'price' => 99],
@@ -14,10 +14,11 @@ class ProductController extends Controller
             ['name' => 'Mouse', 'price' => 49],
         ]);
 
-        return $products->sortBy('price')->values();
+        $sortedProducts = $products->sortBy('price');
+
+        return response()->json($sortedProducts->values());
     }
 }
-
 
 
 
